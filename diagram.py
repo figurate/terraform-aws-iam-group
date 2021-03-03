@@ -1,5 +1,7 @@
 from diagrams import Diagram
-from diagrams.aws.security import IAM
+from diagrams.aws.security import IAM, IAMPermissions
 
 with Diagram("AWS IAM User Group", show=False, direction="TB"):
-    IAM("iam group") << [IAM("user 1..n")]
+    permssions = IAMPermissions("group permissions")
+    group = IAM("iam group")
+    permssions - group << [IAM("user 1..n")]

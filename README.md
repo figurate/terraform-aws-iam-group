@@ -1,8 +1,10 @@
-# ![AWS](aws-logo.png) IAM User
+# ![AWS](aws-logo.png) IAM User Group
 
-Purpose: Provision IAM User in AWS.
+Purpose: Provision IAM Group and associated users in AWS.
 
 Rationale: Apply standards and constraints to IAM Users.
+
+![AWS IAM User Group](aws_iam_user_group.png)
 
 ## Requirements
 
