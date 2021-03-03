@@ -4,7 +4,7 @@ Purpose: Provision IAM Group and associated users in AWS.
 
 Rationale: Apply standards and constraints to IAM Users.
 
-![AWS IAM User Group](aws_iam_user_group.png)
+![AWS IAM User Group](aws\_iam\_user\_group.png)
 
 ## Requirements
 
@@ -20,8 +20,8 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| name | IAM user name | `any` | n/a | yes |
-| userrole | Identifier for the user role | `any` | n/a | yes |
+| name | IAM group name | `any` | n/a | yes |
+| policies | A list of IAM policies to attach to the group | `list(string)` | `[]` | no |
 | users | A list of users included in the user group | `list(string)` | `[]` | no |
 
 ## Outputs

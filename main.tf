@@ -1,9 +1,11 @@
 /**
- * # ![AWS](aws-logo.png) IAM User
+ * # ![AWS](aws-logo.png) IAM User Group
  *
- * Purpose: Provision IAM User in AWS.
+ * Purpose: Provision IAM Group and associated users in AWS.
  *
  * Rationale: Apply standards and constraints to IAM Users.
+ *
+ * ![AWS IAM User Group](aws_iam_user_group.png)
  */
 data "aws_caller_identity" "current" {}
 
@@ -12,8 +14,8 @@ resource "aws_iam_group" "usergroup" {
 }
 
 resource "aws_iam_group_policy_attachment" "attached_policies" {
-  count      = length(local.userroles[var.userrole])
-  policy_arn = local.userroles[var.userrole][count.index]
+  count      = length(var.policies)
+  policy_arn = var.policies[count.index]
   group      = aws_iam_group.usergroup.name
 }
 
