@@ -6,6 +6,8 @@ Rationale: Apply standards and constraints to IAM Users.
 
 ![AWS IAM User Group](aws\_iam\_user\_group.png)
 
+![main workflow](https://github.com/figurate/terraform-aws-iam-usergroup/actions/workflows/main.yml/badge.svg)
+
 ## Requirements
 
 No requirements.
