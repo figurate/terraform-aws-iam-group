@@ -1,20 +1,5 @@
 SHELL:=/bin/bash
-AWS_DEFAULT_REGION?=ap-southeast-2
-
-ifneq (, $(shell which docker))
-TERRAFORM_VERSION=0.13.4
-TERRAFORM=docker run --rm -v "${PWD}:/work" -e AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) -e http_proxy=$(http_proxy) --net=host -w /work hashicorp/terraform:$(TERRAFORM_VERSION)
-else
-TERRAFORM=terraform
-endif
-
-TERRAFORM_DOCS=docker run --rm -v "${PWD}:/work" tmknom/terraform-docs
-
-CHECKOV=docker run --rm -v "${PWD}:/work" bridgecrew/checkov
-
-TFSEC=docker run --rm -v "${PWD}:/work" liamg/tfsec
-
-DIAGRAMS=docker run -v "${PWD}:/work" figurate/diagrams python
+include .env
 
 .PHONY: all clean validate test docs format
 
