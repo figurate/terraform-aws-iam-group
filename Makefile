@@ -10,10 +10,10 @@ clean:
 
 validate:
 	$(TERRAFORM) init && $(TERRAFORM) validate && \
-		$(TERRAFORM) init modules/administrator && $(TERRAFORM) validate modules/administrator && \
-		$(TERRAFORM) init modules/codecommit && $(TERRAFORM) validate modules/codecommit && \
-		$(TERRAFORM) init modules/ecr && $(TERRAFORM) validate modules/ecr && \
-		$(TERRAFORM) init modules/poweruser && $(TERRAFORM) validate modules/poweruser
+		$(TERRAFORM) -chdir=modules/administrator init && $(TERRAFORM) -chdir=modules/administrator validate && \
+		$(TERRAFORM) -chdir=modules/codecommit init && $(TERRAFORM) -chdir=modules/codecommit validate && \
+		$(TERRAFORM) -chdir=modules/ecr init && $(TERRAFORM) -chdir=modules/ecr validate && \
+		$(TERRAFORM) -chdir=modules/poweruser init && $(TERRAFORM) -chdir=modules/poweruser validate
 
 test: validate
 	$(CHECKOV) -d /work
