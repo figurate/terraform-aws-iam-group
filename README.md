@@ -1,12 +1,17 @@
-# ![AWS](aws-logo.png) IAM User Group
+# AWS IAM User Group
 
 Purpose: Provision IAM Group and associated users in AWS.
 
 Rationale: Apply standards and constraints to IAM Users.
 
-![AWS IAM User Group](aws\_iam\_user\_group.png)
+![AWS IAM User Group](aws\_iam\_group.png)
 
-![main workflow](https://github.com/figurate/terraform-aws-iam-usergroup/actions/workflows/main.yml/badge.svg)
+<footer>
+  <p style="text-align:center">
+    <img src="aws-logo.png"/>  
+    Copyright &copy; 2022 <a href="https://www.figurate.org">figurate.org</a>
+  </p>
+</footer>
 
 ## Requirements
 
