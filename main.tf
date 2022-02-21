@@ -32,6 +32,8 @@ resource "aws_iam_user" "users" {
 }
 
 resource "aws_iam_group_membership" "members" {
+  #checkov:skip=CKV2_AWS_21:False positive
+  #checkov:skip=CKV2_AWS_14:Allow empty group for now. May change in future..
   name  = "${var.name}-group-membership"
   group = aws_iam_group.usergroup.name
   users = aws_iam_user.users[*].name
