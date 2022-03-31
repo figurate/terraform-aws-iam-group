@@ -1,23 +1,24 @@
 SHELL:=/bin/bash
 include .env
 
-.PHONY: all clean validate test docs format
+VERSION=$(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
-all: validate test docs format
+.PHONY: all clean validate test diagram docs format release
+
+all: test docs format
 
 clean:
 	rm -rf .terraform/
 
 validate:
-	$(TERRAFORM) init && $(TERRAFORM) validate && \
-		$(TERRAFORM) -chdir=modules/administrator init && $(TERRAFORM) -chdir=modules/administrator validate && \
-		$(TERRAFORM) -chdir=modules/codecommit init && $(TERRAFORM) -chdir=modules/codecommit validate && \
-		$(TERRAFORM) -chdir=modules/ecr init && $(TERRAFORM) -chdir=modules/ecr validate && \
-		$(TERRAFORM) -chdir=modules/poweruser init && $(TERRAFORM) -chdir=modules/poweruser validate
+	$(TERRAFORM) init -upgrade && $(TERRAFORM) validate && \
+		$(TERRAFORM) -chdir=modules/administrator init -upgrade && $(TERRAFORM) -chdir=modules/administrator validate && \
+		$(TERRAFORM) -chdir=modules/codecommit init -upgrade && $(TERRAFORM) -chdir=modules/codecommit validate && \
+		$(TERRAFORM) -chdir=modules/ecr init -upgrade && $(TERRAFORM) -chdir=modules/ecr validate && \
+		$(TERRAFORM) -chdir=modules/poweruser init -upgrade && $(TERRAFORM) -chdir=modules/poweruser validate
 
 test: validate
 	$(CHECKOV) -d /work
-
 	$(TFSEC) /work
 
 diagram:
@@ -36,3 +37,6 @@ format:
 		$(TERRAFORM) fmt -list=true ./modules/codecommit && \
 		$(TERRAFORM) fmt -list=true ./modules/ecr && \
 		$(TERRAFORM) fmt -list=true ./modules/poweruser
+
+release: test
+	git tag $(VERSION) && git push --tags
