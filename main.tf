@@ -1,6 +1,9 @@
 /**
  * # AWS IAM Group
  *
+ * [![CI](https://github.com/figurate/terraform-aws-iam-group/actions/workflows/main.yml/badge.svg)](https://github.com/figurate/terraform-aws-iam-group/actions/workflows/main.yml)
+ *
+ *
  * Purpose: Provision IAM Group and associated users in AWS.
  *
  * Rationale: Apply standards and constraints to IAM Users.
