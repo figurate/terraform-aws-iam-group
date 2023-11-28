@@ -11,11 +11,7 @@ clean:
 	rm -rf .terraform/
 
 validate:
-	$(TERRAFORM) init -upgrade && $(TERRAFORM) validate && \
-		$(TERRAFORM) -chdir=modules/administrator init -upgrade && $(TERRAFORM) -chdir=modules/administrator validate && \
-		$(TERRAFORM) -chdir=modules/codecommit init -upgrade && $(TERRAFORM) -chdir=modules/codecommit validate && \
-		$(TERRAFORM) -chdir=modules/ecr init -upgrade && $(TERRAFORM) -chdir=modules/ecr validate && \
-		$(TERRAFORM) -chdir=modules/poweruser init -upgrade && $(TERRAFORM) -chdir=modules/poweruser validate
+	$(TERRAFORM) init  && $(TERRAFORM) validate
 
 test: validate
 	$(CHECKOV) -d /work
@@ -32,11 +28,7 @@ docs: diagram
 		$(TERRAFORM_DOCS) markdown ./modules/poweruser >./modules/poweruser/README.md
 
 format:
-	$(TERRAFORM) fmt -list=true ./ && \
-		$(TERRAFORM) fmt -list=true ./modules/administrator && \
-		$(TERRAFORM) fmt -list=true ./modules/codecommit && \
-		$(TERRAFORM) fmt -list=true ./modules/ecr && \
-		$(TERRAFORM) fmt -list=true ./modules/poweruser
+	$(TERRAFORM) fmt -list=true -recursive
 
 release: test
 	git tag $(VERSION) && git push --tags
